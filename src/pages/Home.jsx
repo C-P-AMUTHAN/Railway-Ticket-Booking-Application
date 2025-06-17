@@ -57,7 +57,7 @@ const Home = () => {
       {/* Footer */}
       <footer className="bg-white shadow-inner text-center py-4">
         <p className="text-gray-600 text-sm">
-          Developed by <strong>Collector Appa</strong> & <strong>Collector Amma</strong> ❤️ | Contact: <a href="mailto:amuthancp@example.com" className="text-blue-500 hover:underline">amuthancp@example.com</a>
+          Developed by <strong></strong> & <strong></strong> ❤️ | Contact: <a href="mailto:amuthancp@example.com" className="text-blue-500 hover:underline">amuthancp@example.com</a>
         </p>
       </footer>
     </div>
