@@ -1,51 +1,62 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Outlet } from 'react-router-dom';
+import Navigation from './components/Navigation';
 
-import Home from './pages/Home';
-import SearchResults from './pages/SearchResults';
-import BookingForm from './pages/BookingForm';
-import PaymentPage from './pages/PaymentPage';
-import Confirmation from './pages/Confirmation';
-import MyBookings from './pages/MyBookings';
-import TrainTracking from './pages/TrainTracking';
-import CoachPosition from './pages/coach-position'; // or coach-position if you renamed it
-import Profile from './pages/Profile';
+const App = () => {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.1 } },
+  };
 
-function App() {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 font-sans">
-        <header className="bg-blue-800 text-white p-4 shadow-lg">
-          <h1 className="text-3xl font-bold text-center">🚆 Railway Booking System</h1>
-          <nav className="mt-2 flex justify-center space-x-4">
-            <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/bookings" className="hover:underline">My Bookings</Link>
-            <Link to="/track" className="hover:underline">Track Train</Link>
-            <Link to="/coach" className="hover:underline">Coach Position</Link>
-            <Link to="/profile" className="hover:underline">Profile</Link>
-          </nav>
-        </header>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-300 text-gray-900 font-sans">
+      {/* Header with Navigation */}
+      <motion.header
+        className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-10 p-4"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <motion.h1
+          className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 text-center tracking-wide"
+          variants={itemVariants}
+        >
+          🚆 Railway Express
+        </motion.h1>
+        <Navigation />
+      </motion.header>
 
-        <main className="p-6">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/results" element={<SearchResults />} />
-            <Route path="/booking" element={<BookingForm />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/confirmation" element={<Confirmation />} />
-            <Route path="/bookings" element={<MyBookings />} />
-            <Route path="/track" element={<TrainTracking />} />
-            <Route path="/coach" element={<CoachPosition />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </main>
+      {/* Test Color */}
+      <main className="p-6 flex-grow">
+        <div className="text-red-500 text-2xl">Test Color</div>
+        <Outlet />
+      </main>
 
-        <footer className="bg-blue-800 text-white text-center p-2">
-          © 2025 by Amuthan & Collector Amma 🚂
-        </footer>
-      </div>
-    </Router>
+      {/* Footer */}
+      <motion.footer
+        className="bg-white/90 backdrop-blur-md shadow-inner p-4 text-center"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <motion.p
+          className="text-gray-600 text-sm"
+          variants={itemVariants}
+        >
+          © 2025 by{' '}
+          <a href="mailto:amuthancp@example.com" className="text-indigo-600 hover:underline font-medium">
+            Amuthan & Collector Amma 🚂
+          </a>
+        </motion.p>
+      </motion.footer>
+    </div>
   );
-}
+};
 
 export default App;
