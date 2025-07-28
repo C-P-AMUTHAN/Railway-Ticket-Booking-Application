@@ -39,10 +39,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/results',
-    element: <SearchResults />,
+    element: <ProtectedRoute><SearchResults /></ProtectedRoute>,
   },
   {
     path: '/booking',
+    element: <ProtectedRoute><BookingForm /></ProtectedRoute>,
+  },
+  {
+    path: '/book/:trainId',
     element: <ProtectedRoute><BookingForm /></ProtectedRoute>,
   },
   {

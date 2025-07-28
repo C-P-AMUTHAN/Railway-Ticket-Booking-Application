@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import './Navigation.css';
 
 const Navigation = () => {
   const location = useLocation();
@@ -13,18 +14,16 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      className="mt-4"
+      className="navigation"
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
     >
-      <div className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10 flex-wrap">
+      <div className="nav-container">
         <motion.div variants={itemVariants}>
           <Link
             to="/"
-            className={`text-indigo-600 font-medium text-lg hover:text-indigo-800 hover:underline transition-colors ${
-              location.pathname === '/' ? 'text-indigo-800 font-semibold' : ''
-            }`}
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
             Home
           </Link>
@@ -32,9 +31,7 @@ const Navigation = () => {
         <motion.div variants={itemVariants}>
           <Link
             to="/bookings"
-            className={`text-indigo-600 font-medium text-lg hover:text-indigo-800 hover:underline transition-colors ${
-              location.pathname === '/bookings' ? 'text-indigo-800 font-semibold' : ''
-            }`}
+            className={`nav-link ${location.pathname === '/bookings' ? 'active' : ''}`}
           >
             My Bookings
           </Link>
@@ -42,9 +39,7 @@ const Navigation = () => {
         <motion.div variants={itemVariants}>
           <Link
             to="/track"
-            className={`text-indigo-600 font-medium text-lg hover:text-indigo-800 hover:underline transition-colors ${
-              location.pathname === '/track' ? 'text-indigo-800 font-semibold' : ''
-            }`}
+            className={`nav-link ${location.pathname === '/track' ? 'active' : ''}`}
           >
             Track Train
           </Link>
@@ -52,9 +47,7 @@ const Navigation = () => {
         <motion.div variants={itemVariants}>
           <Link
             to="/coach"
-            className={`text-indigo-600 font-medium text-lg hover:text-indigo-800 hover:underline transition-colors ${
-              location.pathname === '/coach' ? 'text-indigo-800 font-semibold' : ''
-            }`}
+            className={`nav-link ${location.pathname === '/coach' ? 'active' : ''}`}
           >
             Coach Position
           </Link>
@@ -62,9 +55,7 @@ const Navigation = () => {
         <motion.div variants={itemVariants}>
           <Link
             to="/profile"
-            className={`text-indigo-600 font-medium text-lg hover:text-indigo-800 hover:underline transition-colors ${
-              location.pathname === '/profile' ? 'text-indigo-800 font-semibold' : ''
-            }`}
+            className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}
           >
             Profile
           </Link>
@@ -77,7 +68,7 @@ const Navigation = () => {
                 localStorage.removeItem('loggedIn');
                 window.location.href = '/signin'; // Simple logout redirect
               }}
-              className="text-red-600 font-medium text-lg hover:text-red-800 hover:underline transition-colors"
+              className="nav-link logout"
             >
               Logout
             </Link>
@@ -87,9 +78,7 @@ const Navigation = () => {
             <motion.div variants={itemVariants}>
               <Link
                 to="/signin"
-                className={`text-green-600 font-medium text-lg hover:text-green-800 hover:underline transition-colors ${
-                  location.pathname === '/signin' ? 'text-green-800 font-semibold' : ''
-                }`}
+                className={`nav-link signin ${location.pathname === '/signin' ? 'active' : ''}`}
               >
                 Sign In
               </Link>
@@ -97,9 +86,7 @@ const Navigation = () => {
             <motion.div variants={itemVariants}>
               <Link
                 to="/signup"
-                className={`text-green-600 font-medium text-lg hover:text-green-800 hover:underline transition-colors ${
-                  location.pathname === '/signup' ? 'text-green-800 font-semibold' : ''
-                }`}
+                className={`nav-link signup ${location.pathname === '/signup' ? 'active' : ''}`}
               >
                 Sign Up
               </Link>

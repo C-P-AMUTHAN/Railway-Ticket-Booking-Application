@@ -1,0 +1,148 @@
+/* Home page styles */
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, #dbeafe, #e0e7ff, #f3e8ff);
+  color: #111827;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.home-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: transparent;
+  background-clip: text;
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  letter-spacing: -0.025em;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-success {
+  background-color: #16a34a;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #15803d;
+}
+
+.home-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.home-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.home-heading span {
+  color: #4f46e5;
+}
+
+.home-description {
+  max-width: 48rem;
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.book-now-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.book-now-btn:hover {
+  background-color: #4338ca;
+}
+
+.home-footer {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.footer-text {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.footer-link {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .home-heading {
+    font-size: 3.75rem;
+  }
+  
+  .home-description {
+    font-size: 1.25rem;
+  }
+} 

@@ -9,26 +9,78 @@ const PaymentPage = () => {
     navigate('/confirmation');
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
   const buttonVariants = {
     hover: { scale: 1.05, boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)' },
     tap: { scale: 0.95 },
   };
 
+  const cardStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backdropFilter: 'blur(12px)',
+    padding: '2rem',
+    borderRadius: '0.75rem',
+    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    maxWidth: '28rem',
+    width: '100%',
+  };
+
+  const titleStyle = {
+    fontSize: '1.875rem',
+    fontWeight: '800',
+    color: 'transparent',
+    background: 'linear-gradient(to right, #16a34a, #34d399)',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    marginBottom: '1.5rem',
+    textAlign: 'center',
+  };
+
+  const buttonStyle = {
+    width: '100%',
+    backgroundColor: '#16a34a',
+    color: 'white',
+    padding: '0.75rem',
+    borderRadius: '0.375rem',
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+  };
+
+  const hoverButtonStyle = {
+    backgroundColor: '#15803d',
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200">
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to bottom right, #dbeafe, #e0e7ff, #f3e8ff)' }}>
       <motion.div
-        className="p-8 bg-white/80 backdrop-blur-md rounded-xl shadow-lg w-full max-w-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        style={cardStyle}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
       >
-        <h2 className="text-2xl font-bold text-indigo-600 mb-6 text-center">Payment Gateway</h2>
+        <motion.h2
+          style={titleStyle}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          Payment Gateway 💳
+        </motion.h2>
         <motion.button
           onClick={handlePayment}
-          className="w-full bg-green-600 text-white p-3 rounded-md hover:bg-green-700 transition-all duration-300"
+          style={buttonStyle}
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
+          onMouseEnter={(e) => Object.assign(e.target.style, hoverButtonStyle)}
+          onMouseLeave={(e) => Object.assign(e.target.style, buttonStyle)}
         >
           Pay Now
         </motion.button>

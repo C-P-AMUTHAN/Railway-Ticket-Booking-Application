@@ -1,0 +1,66 @@
+/* Navigation component styles */
+.navigation {
+  margin-top: 1rem;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #6366F1;
+  font-weight: 500;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #4F46E5;
+  text-decoration: underline;
+}
+
+.nav-link.active {
+  color: #4F46E5;
+  font-weight: 600;
+}
+
+.nav-link.logout {
+  color: #dc2626;
+}
+
+.nav-link.logout:hover {
+  color: #991b1b;
+}
+
+.nav-link.signin,
+.nav-link.signup {
+  color: #16a34a;
+}
+
+.nav-link.signin:hover,
+.nav-link.signup:hover {
+  color: #166534;
+}
+
+.nav-link.signin.active,
+.nav-link.signup.active {
+  color: #166534;
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .nav-container {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-container {
+    gap: 2.5rem;
+  }
+} 

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import './App.css';
 
 const App = () => {
   const containerVariants = {
@@ -15,16 +16,16 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-300 text-gray-900 font-sans">
+    <div className="app-container">
       {/* Header with Navigation */}
       <motion.header
-        className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-10 p-4"
+        className="app-header"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <motion.h1
-          className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 text-center tracking-wide"
+          className="app-title"
           variants={itemVariants}
         >
           🚆 Railway Express
@@ -33,24 +34,24 @@ const App = () => {
       </motion.header>
 
       {/* Test Color */}
-      <main className="p-6 flex-grow">
-        <div className="text-red-500 text-2xl">Test Color</div>
+      <main className="app-main">
+        <div className="test-color">Test Color</div>
         <Outlet />
       </main>
 
       {/* Footer */}
       <motion.footer
-        className="bg-white/90 backdrop-blur-md shadow-inner p-4 text-center"
+        className="app-footer"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <motion.p
-          className="text-gray-600 text-sm"
+          className="footer-text"
           variants={itemVariants}
         >
           © 2025 by{' '}
-          <a href="mailto:amuthancp@example.com" className="text-indigo-600 hover:underline font-medium">
+          <a href="mailto:amuthancp@example.com" className="footer-link">
             Amuthan & Collector Amma 🚂
           </a>
         </motion.p>

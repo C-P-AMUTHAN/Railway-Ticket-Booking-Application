@@ -1,19 +1,89 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Confirmation = () => {
+  const navigate = useNavigate();
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const cardStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backdropFilter: 'blur(12px)',
+    padding: '2rem',
+    borderRadius: '0.75rem',
+    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    maxWidth: '28rem',
+    width: '100%',
+  };
+
+  const titleStyle = {
+    fontSize: '1.875rem',
+    fontWeight: '800',
+    color: 'transparent',
+    background: 'linear-gradient(to right, #16a34a, #34d399)',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    marginBottom: '1rem',
+    textAlign: 'center',
+  };
+
+  const textStyle = {
+    color: '#4b5563',
+    fontSize: '1rem',
+    textAlign: 'center',
+  };
+
+  const buttonStyle = {
+    backgroundColor: '#4b5bff',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.375rem',
+    fontSize: '1rem',
+    fontWeight: '600',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    textDecoration: 'none',
+    display: 'inline-block',
+  };
+
+  const hoverButtonStyle = {
+    backgroundColor: '#3b4dd8',
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200">
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to bottom right, #dbeafe, #e0e7ff, #f3e8ff)' }}>
       <motion.div
-        className="p-8 bg-white/80 backdrop-blur-md rounded-xl shadow-lg w-full max-w-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        style={cardStyle}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
       >
-        <h2 className="text-2xl font-bold text-green-600 mb-4 text-center">Booking Confirmed!</h2>
-        <p className="text-gray-600 text-center">
-          Your ticket has been booked successfully. Check{' '}
-          <span className="text-indigo-600 font-semibold">"My Bookings"</span> for more details.
+        <motion.h2
+          style={titleStyle}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          Booking Confirmed! 🎉
+        </motion.h2>
+        <p style={textStyle}>
+          Your ticket has been booked successfully.{' '}
+          <motion.button
+            onClick={() => navigate('/bookings')}
+            style={buttonStyle}
+            whileHover={{ ...hoverButtonStyle }}
+            whileTap={{ scale: 0.95 }}
+            onMouseEnter={(e) => Object.assign(e.target.style, hoverButtonStyle)}
+            onMouseLeave={(e) => Object.assign(e.target.style, buttonStyle)}
+          >
+            My Bookings
+          </motion.button>{' '}
+          for more details.
         </p>
       </motion.div>
     </div>

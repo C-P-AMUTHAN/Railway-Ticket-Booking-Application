@@ -1,14 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color: #1a1a1a;
   background-color: #ffffff;
+  
+  /* Custom colors */
+  --railway-indigo: #6366F1;
+  --railway-purple: #8B5CF6;
+  --railway-blue: #3B82F6;
+  --railway-indigo-dark: #4F46E5;
+  --railway-purple-dark: #7C3AED;
+  --railway-blue-dark: #2563EB;
 }
 
 body {
@@ -24,11 +34,12 @@ h1 {
 
 a {
   font-weight: 500;
-  color: #6366F1; /* Tailwind indigo-600 */
+  color: var(--railway-indigo);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #4F46E5; /* Tailwind indigo-700 */
+  color: var(--railway-indigo-dark);
 }
 
 button {
@@ -42,10 +53,207 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #6366F1;
+  border-color: var(--railway-indigo);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Utility classes */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-gradient-to-br {
+  background: linear-gradient(to bottom right, #f3e8ff, #e0e7ff, #dbeafe);
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.font-sans {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
+.bg-clip-text {
+  background-clip: text;
+}
+
+.bg-gradient-to-r {
+  background: linear-gradient(to right, var(--railway-indigo), var(--railway-purple));
+}
+
+.text-center {
+  text-align: center;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.text-red-500 {
+  color: #ef4444;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.shadow-inner {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-indigo-600 {
+  color: var(--railway-indigo);
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Navigation styles */
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-x-6 > * + * {
+  margin-left: 1.5rem;
+}
+
+.space-x-8 > * + * {
+  margin-left: 2rem;
+}
+
+.space-x-10 > * + * {
+  margin-left: 2.5rem;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.hover\:text-indigo-800:hover {
+  color: var(--railway-indigo-dark);
+}
+
+.transition-colors {
+  transition: color 0.15s ease-in-out;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-red-600 {
+  color: #dc2626;
+}
+
+.hover\:text-red-800:hover {
+  color: #991b1b;
+}
+
+.text-green-600 {
+  color: #16a34a;
+}
+
+.hover\:text-green-800:hover {
+  color: #166534;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .md\:text-4xl {
+    font-size: 2.25rem;
+  }
+  
+  .md\:space-x-8 > * + * {
+    margin-left: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:space-x-10 > * + * {
+    margin-left: 2.5rem;
+  }
 }
