@@ -10,12 +10,29 @@ const Signup = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.name && form.email && form.password) {
-      localStorage.setItem('loggedIn', 'true');
-      alert('Account created successfully!');
-      navigate('/');
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Account created successfully!');
+          navigate('/signin');
+        } else {
+          alert(data.message || 'Signup failed');
+        }
+      } catch (error) {
+        alert('Error connecting to server');
+      }
     } else {
       alert('Please fill in all fields!');
     }

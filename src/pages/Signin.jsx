@@ -10,12 +10,30 @@ const Signin = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.email && form.password) {
-      localStorage.setItem('loggedIn', 'true');
-      alert('Login successful!');
-      navigate('/');
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/signin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('loggedIn', 'true');
+          alert('Login successful!');
+          navigate('/');
+        } else {
+          alert(data.message || 'Invalid email or password!');
+        }
+      } catch (error) {
+        alert('Failed to connect to the server!');
+      }
     } else {
       alert('Please enter both email and password!');
     }
@@ -153,3 +171,4 @@ const Signin = () => {
 };
 
 export default Signin;
+  
