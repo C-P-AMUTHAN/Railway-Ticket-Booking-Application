@@ -60,6 +60,14 @@ const Navigation = () => {
             Profile
           </Link>
         </motion.div>
+        <motion.div variants={itemVariants}>
+          <Link
+            to="/prompt-booking"
+            className={`nav-link ${location.pathname === '/prompt-booking' ? 'active' : ''}`}
+          >
+            Prompt Booking
+          </Link>
+        </motion.div>
         {isLoggedIn ? (
           <motion.div variants={itemVariants}>
             <Link

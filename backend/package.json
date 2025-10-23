@@ -12,10 +12,16 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "chromedriver": "^140.0.4",
+    "chrono-node": "^2.9.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.17.0"
+    "moment": "^2.30.1",
+    "mongoose": "^8.17.0",
+    "nodemailer": "^7.0.10",
+    "railway-booking": "file:..",
+    "selenium-webdriver": "^4.35.0"
   }
 }

@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Home.css';
 
 const Home = () => {
+  const [user, setUser] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:5000/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          } else if (res.status === 401) {
+            localStorage.removeItem('token');
+            return null;
+          } else {
+            return null;
+          }
+        })
+        .then(data => setUser(data))
+        .catch(() => setUser(null));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    setShowPopup(false);
+  };
 
   const handleBookNow = () => {
-    if (!isLoggedIn) {
+    if (!user) {
       alert('Please log in to continue.');
-      navigate('/signin');
+      navigate('/signin?redirect=/booking');
     } else {
-      navigate('/results');
+      navigate('/booking');
     }
   };
 
@@ -38,24 +66,54 @@ const Home = () => {
           Railway Express 🚆
         </h1>
         <div className="header-buttons">
-          <motion.button
-            onClick={() => navigate('/signin')}
-            className="btn btn-primary"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Sign In
-          </motion.button>
-          <motion.button
-            onClick={() => navigate('/signup')}
-            className="btn btn-success"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Sign Up
-          </motion.button>
+          {!user ? (
+            <>
+              <motion.button
+                onClick={() => navigate('/signin')}
+                className="btn btn-primary"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                Sign In
+              </motion.button>
+              <motion.button
+                onClick={() => navigate('/signup')}
+                className="btn btn-success"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                Sign Up
+              </motion.button>
+              <motion.button
+                onClick={() => navigate('/admin-signin')}
+                className="btn btn-warning"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                Admin Login
+              </motion.button>
+            </>
+          ) : (
+            <div className="user-info">
+              <span
+                style={{ cursor: 'pointer', fontSize: 24 }}
+                onClick={() => setShowPopup(true)}
+                title="User Profile"
+              >👤</span>
+              {showPopup && (
+                <div className="popup">
+                  <h3>User Details</h3>
+                  <p><b>Name:</b> {user.name}</p>
+                  <p><b>Email:</b> {user.email}</p>
+                  <button onClick={handleLogout}>Logout</button>
+                  <button onClick={() => setShowPopup(false)}>Close</button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </motion.header>
 
@@ -92,6 +150,12 @@ const Home = () => {
         >
           <span>🚀 Book Now</span>
         </motion.button>
+        <button
+          style={{ margin: '1em 0', padding: '0.5em 1em', fontSize: '1em' }}
+          onClick={() => navigate('/prompt-booking')}
+        >
+          Go to Prompt Booking
+        </button>
       </motion.main>
 
       <motion.footer

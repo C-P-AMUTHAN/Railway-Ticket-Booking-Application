@@ -7,5 +7,14 @@ export default defineConfig({
     hmr: {
       overlay: false, // Disable the error overlay temporarily
     },
+    // Proxy API requests to backend during development
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api')
+      }
+    }
   },
 });

@@ -6,31 +6,36 @@ const Signin = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
 
+  // Get redirect query param
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirectPath = searchParams.get('redirect') || '/';
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.email && form.password) {
+    const { email, password } = form;
+    if (email && password) {
       try {
-        const response = await fetch('http://localhost:5000/api/auth/signin', {
+        fetch('http://localhost:5000/api/auth/signin', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(form),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          localStorage.setItem('loggedIn', 'true');
-          alert('Login successful!');
-          navigate('/');
-        } else {
-          alert(data.message || 'Invalid email or password!');
-        }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.token) {
+              localStorage.setItem('token', data.token);
+              if (data.user && data.user.role) {
+                localStorage.setItem('role', data.user.role);
+              }
+              navigate(redirectPath);
+            } else {
+              alert(data.message || 'Invalid email or password!');
+            }
+          });
       } catch (error) {
         alert('Failed to connect to the server!');
       }
@@ -171,4 +176,3 @@ const Signin = () => {
 };
 
 export default Signin;
-  

@@ -1,63 +1,101 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Outlet } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import './App.css';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import SearchResults from './pages/SearchResults';
+import BookingForm from './pages/BookingForm';
+import PaymentPage from './pages/PaymentPage';
+import Confirmation from './pages/Confirmation';
+import MyBookings from './pages/MyBookings';
+import TrainTracking from './pages/TrainTracking';
+import CoachPosition from './pages/coach-position';
+import Profile from './pages/Profile';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import PromptBooking from './pages/PromptBooking';
+import AdminSignin from "./pages/AdminSignin";
+import AdminDashboard from "./pages/AdminDashboard";
 
-const App = () => {
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.1 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
-  return (
-    <div className="app-container">
-      {/* Header with Navigation */}
-      <motion.header
-        className="app-header"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.h1
-          className="app-title"
-          variants={itemVariants}
-        >
-          🚆 Railway Express
-        </motion.h1>
-        <Navigation />
-      </motion.header>
-
-      {/* Test Color */}
-      <main className="app-main">
-        <div className="test-color">Test Color</div>
-        <Outlet />
-      </main>
-
-      {/* Footer */}
-      <motion.footer
-        className="app-footer"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.p
-          className="footer-text"
-          variants={itemVariants}
-        >
-          © 2025 by{' '}
-          <a href="mailto:amuthancp@example.com" className="footer-link">
-            Amuthan & Collector Amma 🚂
-          </a>
-        </motion.p>
-      </motion.footer>
-    </div>
-  );
+// Simple protected route wrapper to check login status
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/signin" replace />;
 };
 
-export default App;
+// Error page for unmatched routes
+const ErrorPage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-300">
+    <div className="p-8 bg-white/80 backdrop-blur-md rounded-xl shadow-lg text-center">
+      <h2 className="text-2xl font-bold text-indigo-600 mb-4">404 - Page Not Found</h2>
+      <p className="text-gray-600 mb-4">The page you're looking for doesn't exist.</p>
+      <a href="/" className="text-indigo-600 hover:underline font-medium">
+        Return to Home
+      </a>
+    </div>
+  </div>
+);
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/results',
+    element: <ProtectedRoute><SearchResults /></ProtectedRoute>,
+  },
+  {
+    path: '/booking',
+    element: <ProtectedRoute><BookingForm /></ProtectedRoute>,
+  },
+  {
+    path: '/book/:trainId',
+    element: <ProtectedRoute><BookingForm /></ProtectedRoute>,
+  },
+  {
+    path: '/payment',
+    element: <ProtectedRoute><PaymentPage /></ProtectedRoute>,
+  },
+  {
+    path: '/confirmation',
+    element: <ProtectedRoute><Confirmation /></ProtectedRoute>,
+  },
+  {
+    path: '/bookings',
+    element: <ProtectedRoute><MyBookings /></ProtectedRoute>,
+  },
+  {
+    path: '/track',
+    element: <ProtectedRoute><TrainTracking /></ProtectedRoute>,
+  },
+  {
+    path: '/coach',
+    element: <ProtectedRoute><CoachPosition /></ProtectedRoute>,
+  },
+  {
+    path: '/profile',
+    element: <ProtectedRoute><Profile /></ProtectedRoute>,
+  },
+  {
+    path: '/signin',
+    element: <Signin />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
+  },
+  {
+    path: '/prompt-booking',
+    element: <PromptBooking />,
+  },
+  {
+    path: '/admin-signin',
+    element: <AdminSignin />,
+  },
+  {
+    path: '/admin-dashboard',
+    element: <AdminDashboard />,
+  },
+]); 
+
+export default router;
